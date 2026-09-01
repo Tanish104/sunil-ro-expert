@@ -2373,182 +2373,90 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<!-- SUNIL AI GEMINI — FINAL FRONTEND -->
+<!-- Sunil AI Assistant -->
 <style>
-#sunilAIButton{position:fixed;right:20px;bottom:20px;z-index:99999;border:0;border-radius:999px;padding:14px 19px;background:linear-gradient(135deg,#0b4f53,#0878ff);color:#fff;font:800 14px Arial;box-shadow:0 12px 35px #0004;cursor:pointer}
-#sunilAIPanel{position:fixed;right:20px;bottom:78px;width:410px;max-width:calc(100vw - 24px);height:680px;max-height:calc(100vh - 90px);z-index:100000;background:#fff;border-radius:22px;box-shadow:0 20px 65px #0004;display:none;overflow:hidden;font-family:Arial,sans-serif;border:1px solid #dbe8f0}
-#sunilAIPanel.open{display:flex;flex-direction:column}
-.sai-head{background:linear-gradient(135deg,#0b4f53,#0878ff);color:#fff;padding:16px;display:flex;justify-content:space-between;align-items:center}
-.sai-head strong{font-size:18px} .sai-head small{display:block;margin-top:3px;opacity:.9}
-.sai-x{border:0;background:#ffffff22;color:#fff;border-radius:10px;width:34px;height:34px;font-size:21px;cursor:pointer}
-.sai-chat{flex:1;overflow:auto;background:#f6faff;padding:14px}
-.sai-msg{max-width:90%;padding:10px 12px;border-radius:15px;margin:7px 0;font-size:13px;line-height:1.5;white-space:pre-wrap}
-.sai-bot{background:#fff;border:1px solid #e1eaf2;border-top-left-radius:4px}
-.sai-user{margin-left:auto;background:#0878ff;color:#fff;border-top-right-radius:4px}
-.sai-status{font-size:10px;color:#6b7b8a;text-align:center;padding:5px;background:#f8fbfd}
-.sai-foot{border-top:1px solid #e1eaf2;background:#fff;padding:9px;display:flex;gap:7px}
-.sai-foot input{min-width:0;flex:1;border:1px solid #cbd9e5;border-radius:12px;padding:10px;outline:none}
-.sai-foot button{border:0;background:#0878ff;color:#fff;border-radius:12px;padding:0 14px;font-weight:800;cursor:pointer}
-.sai-foot button:disabled{opacity:.6;cursor:wait}
-.sai-new{border:0;background:#ffffff22;color:#fff;border-radius:10px;padding:8px 10px;font-size:11px;cursor:pointer;margin-right:6px}
-@media(max-width:520px){#sunilAIButton{right:12px;bottom:12px}#sunilAIPanel{right:12px;bottom:67px;width:calc(100vw - 24px)}}
+#sunil-ai-launch{position:fixed;right:22px;bottom:22px;z-index:9998;border:0;border-radius:999px;padding:14px 19px;background:#0b76ff;color:#fff;font:800 14px/1 system-ui;box-shadow:0 12px 34px #0003;cursor:pointer}
+#sunil-ai-panel{position:fixed;right:22px;bottom:78px;width:min(390px,calc(100vw - 28px));height:620px;max-height:calc(100vh - 96px);z-index:9999;background:#fff;border:1px solid #dfeaf4;border-radius:22px;box-shadow:0 18px 60px #0003;overflow:hidden;display:none;font-family:system-ui,Arial}
+.sai-head{background:linear-gradient(135deg,#0b4f53,#0878ff);color:#fff;padding:17px;display:flex;justify-content:space-between;align-items:center}
+.sai-title{font-size:18px;font-weight:850}.sai-sub{font-size:11px;opacity:.9;margin-top:3px}.sai-close{border:0;background:#ffffff22;color:#fff;border-radius:10px;width:34px;height:34px;font-size:20px;cursor:pointer}
+.sai-body{height:calc(100% - 130px);overflow:auto;background:#f7fbff;padding:15px}.sai-msg{max-width:88%;padding:11px 13px;border-radius:15px;margin:7px 0;font-size:13px;line-height:1.45;white-space:pre-wrap}.sai-bot{background:#fff;border:1px solid #e3edf5;border-top-left-radius:5px}.sai-user{margin-left:auto;background:#0878ff;color:#fff;border-top-right-radius:5px}.sai-quick{display:flex;flex-wrap:wrap;gap:7px;margin:11px 0}.sai-quick button{border:1px solid #cfe0ef;background:#fff;border-radius:999px;padding:8px 10px;font-size:11px;cursor:pointer}.sai-foot{height:65px;border-top:1px solid #e4edf5;background:#fff;padding:10px;display:flex;gap:7px}.sai-foot input{flex:1;border:1px solid #cad9e7;border-radius:12px;padding:10px;outline:none}.sai-foot button{border:0;border-radius:12px;background:#0878ff;color:#fff;padding:0 14px;font-weight:800;cursor:pointer}
+@media(max-width:520px){#sunil-ai-launch{right:14px;bottom:14px}#sunil-ai-panel{right:14px;bottom:70px}}
 </style>
-
-<button id="sunilAIButton" type="button">🤖 Ask Sunil AI</button>
-
-<div id="sunilAIPanel">
-  <div class="sai-head">
-    <div>
-      <strong>💧 Sunil AI</strong>
-      <small>AI RO & Water Purifier Business Agent</small>
+<button id="sunil-ai-launch" aria-label="Open Sunil AI">🤖 Ask Sunil AI</button>
+<section id="sunil-ai-panel" aria-label="Sunil AI customer assistant">
+  <header class="sai-head">
+    <div><div class="sai-title">💧 Sunil AI</div><div class="sai-sub">RO & Water Purifier Assistant</div></div>
+    <button class="sai-close" aria-label="Close">×</button>
+  </header>
+  <main class="sai-body" id="sai-chat">
+    <div class="sai-msg sai-bot">Hi! 👋 I’m Sunil AI. I can help with RO repair, filter replacement, new purifier selection, service booking and service-area questions.</div>
+    <div class="sai-quick">
+      <button data-q="My RO is not working">🔧 RO Repair</button>
+      <button data-q="I want to buy a new RO">💧 Buy New RO</button>
+      <button data-q="I need filter or membrane replacement">🧰 Filters</button>
+      <button data-q="I want to book a service">📅 Book Service</button>
+      <button data-q="What areas do you service?">📍 Service Areas</button>
     </div>
-    <div>
-      <button class="sai-new" id="sunilAINew" type="button">New chat</button>
-      <button class="sai-x" type="button" aria-label="Close">×</button>
-    </div>
-  </div>
-
-  <div class="sai-status" id="sunilAIStatus">Checking Sunil AI…</div>
-
-  <div class="sai-chat" id="sunilAIChat">
-    <div class="sai-msg sai-bot">Hi! I’m Sunil AI. Ask me anything about RO and water purifiers — buying, repair, filters, membrane, TDS, technologies, service or booking.</div>
-  </div>
-
-  <div class="sai-foot">
-    <input id="sunilAIInput" placeholder="Ask anything about RO..." autocomplete="off">
-    <button id="sunilAISend" type="button">Send</button>
-  </div>
-</div>
-
+  </main>
+  <footer class="sai-foot">
+    <input id="sai-input" placeholder="Describe your RO problem..." autocomplete="off">
+    <button id="sai-send">Send</button>
+  </footer>
+</section>
 <script>
 (function(){
-  const API_URL = "https://sunil-ai-agent.onrender.com/api/chat";
-  const STORAGE_KEY = "sunil_ai_gemini_interaction_id";
+ const panel=document.getElementById('sunil-ai-panel'), launch=document.getElementById('sunil-ai-launch'),
+ chat=document.getElementById('sai-chat'), input=document.getElementById('sai-input');
+ if(!panel||!launch)return;
+ launch.onclick=()=>panel.style.display='block';
+ panel.querySelector('.sai-close').onclick=()=>panel.style.display='none';
+ function add(t,c){const d=document.createElement('div');d.className='sai-msg '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+ function localReply(q){
+   const s=q.toLowerCase();
+   if(/not working|repair|leak|noise|slow/.test(s)) return "I can help narrow it down. What is happening?
 
-  const btn = document.getElementById("sunilAIButton");
-  const panel = document.getElementById("sunilAIPanel");
-  const close = panel.querySelector(".sai-x");
-  const newBtn = document.getElementById("sunilAINew");
-  const chat = document.getElementById("sunilAIChat");
-  const input = document.getElementById("sunilAIInput");
-  const sendBtn = document.getElementById("sunilAISend");
-  const status = document.getElementById("sunilAIStatus");
+1) No water
+2) Very slow water
+3) Leakage
+4) Bad taste/smell
+5) Unusual noise
+6) Not switching on
 
-  let interactionId = sessionStorage.getItem(STORAGE_KEY) || null;
+Reply with the number and I’ll guide you to the right service.";
+   if(/buy|new ro|purifier/.test(s)) return "Sure. Tell me:
+• Number of people at home
+• Water source (municipal/borewell/tanker/other)
+• Approximate TDS if known
+• Your budget
 
-  function addMessage(text, isUser) {
-    const d = document.createElement("div");
-    d.className = "sai-msg " + (isUser ? "sai-user" : "sai-bot");
-    d.textContent = text;
-    chat.appendChild(d);
-    chat.scrollTop = chat.scrollHeight;
-  }
+A technician should check water quality before a final recommendation.";
+   if(/filter|membrane/.test(s)) return "Filter or membrane replacement depends on the RO model, usage and water quality. Tell me your brand/model if known and the problem you are seeing, or request an inspection.";
+   if(/book|service/.test(s)) return "Let's create a service request. Please provide:
+Name:
+Phone:
+Locality:
+RO problem:
+Preferred day/time:
 
-  function resetChat() {
-    interactionId = null;
-    sessionStorage.removeItem(STORAGE_KEY);
-    chat.innerHTML = "";
-    addMessage("New conversation started. How can I help with your RO or water-purifier requirement?", false);
-    status.textContent = "Sunil AI • Ready";
-    input.focus();
-  }
-
-  async function checkBackend() {
-    try {
-      const r = await fetch(API_URL.replace("/api/chat", "/health"), {
-        method: "GET",
-        cache: "no-store"
-      });
-      const j = await r.json().catch(() => ({}));
-      if (r.ok && j.ok) {
-        status.textContent = "Sunil AI • Connected";
-      } else {
-        status.textContent = "Sunil AI • Backend error";
-      }
-    } catch (e) {
-      status.textContent = "Sunil AI • Cannot reach backend";
-    }
-  }
-
-  async function sendMessage() {
-    const message = input.value.trim();
-    if (!message || sendBtn.disabled) return;
-
-    input.value = "";
-    addMessage(message, true);
-    status.textContent = "Sunil AI • Thinking…";
-    sendBtn.disabled = true;
-
-    try {
-      const body = { message: message };
-      if (interactionId) body.previous_interaction_id = interactionId;
-
-      const r = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(body),
-        cache: "no-store"
-      });
-
-      const raw = await r.text();
-      let data = {};
-      try { data = JSON.parse(raw); } catch (_) {}
-
-      if (!r.ok) {
-        const detail = data.detail || data.error || ("HTTP " + r.status);
-        throw new Error(detail);
-      }
-
-      if (data.response_id) {
-        interactionId = data.response_id;
-        sessionStorage.setItem(STORAGE_KEY, interactionId);
-      }
-
-      addMessage(data.reply || "I couldn't generate a response. Please try again.", false);
-      status.textContent = "Sunil AI • Connected";
-    } catch (err) {
-      console.error("Sunil AI error:", err);
-      const msg = String(err && err.message ? err.message : err);
-
-      if (msg.toLowerCase().includes("previous") || msg.toLowerCase().includes("interaction")) {
-        interactionId = null;
-        sessionStorage.removeItem(STORAGE_KEY);
-        addMessage("I couldn't continue the previous conversation. I've reset the conversation. Please send your question again.", false);
-      } else {
-        addMessage("Sunil AI couldn't complete that request right now. Technical detail: " + msg, false);
-      }
-
-      status.textContent = "Sunil AI • Request failed";
-    } finally {
-      sendBtn.disabled = false;
-      input.focus();
-    }
-  }
-
-  btn.addEventListener("click", function() {
-    panel.classList.add("open");
-    checkBackend();
-    input.focus();
-  });
-
-  close.addEventListener("click", function() {
-    panel.classList.remove("open");
-  });
-
-  newBtn.addEventListener("click", resetChat);
-  sendBtn.addEventListener("click", sendMessage);
-
-  input.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-
-  checkBackend();
+Then confirm the request with Sunil RO Expert through the site's phone or WhatsApp option.";
+   if(/area|location|ghaziabad|delhi/.test(s)) return "Sunil RO Expert serves configured local areas around Ghaziabad and Delhi NCR. To avoid false promises, the exact service-area list should be configured by the business owner.";
+   return "Got it. Please tell me your RO brand/model (if known), the exact problem, your locality, and whether you need repair, replacement, or a new purifier.";
+ }
+ async function send(q){
+   q=(q||input.value).trim(); if(!q)return; input.value=''; add(q,'sai-user');
+   // If a backend is installed, use it; otherwise the assistant works in demo mode.
+   try{
+     const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});
+     if(r.ok){const j=await r.json(); if(j.reply){add(j.reply,'sai-bot');return}}
+   }catch(e){}
+   setTimeout(()=>add(localReply(q),'sai-bot'),250);
+ }
+ document.getElementById('sai-send').onclick=()=>send();
+ input.addEventListener('keydown',e=>{if(e.key==='Enter')send()});
+ document.querySelectorAll('.sai-quick button').forEach(b=>b.onclick=()=>send(b.dataset.q));
 })();
 </script>
-<!-- END SUNIL AI GEMINI — FINAL FRONTEND -->
+<!-- End Sunil AI Assistant -->
 
 </body>
 </html>
