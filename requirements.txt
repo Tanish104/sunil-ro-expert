@@ -1,4 +1,0 @@
-Flask>=3.0,<4
-flask-cors>=4.0,<7
-google-genai>=1.67.0
-gunicorn>=22,<24
