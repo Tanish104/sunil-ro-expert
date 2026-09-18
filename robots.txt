@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tanish104.github.io/sunil-ro-expert/sitemap.xml
+Sitemap: https://sunilroexpert.co.in/sitemap.xml
